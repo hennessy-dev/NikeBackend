@@ -22,4 +22,6 @@ public partial class Product : BaseEntity
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+    public virtual ICollection<ProductOption> ProductOptions { get; set; } = new List<ProductOption>();
+
 }
