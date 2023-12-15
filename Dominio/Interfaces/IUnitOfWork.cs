@@ -10,6 +10,7 @@ public interface IUnitOfWork
     IProduct Products { get; }
     IProductCategory ProductCategories { get; }
     IRefreshToken RefreshTokens { get; }
+    IProductOption ProductOptions {get;}
 
     Task<int> SaveAsync();
 }

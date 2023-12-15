@@ -196,6 +196,31 @@ namespace Persistencia.Data.Migrations
                     b.ToTable("product_categories", (string)null);
                 });
 
+            modelBuilder.Entity("Dominio.Entities.ProductOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<int>("OptionsId")
+                        .HasColumnType("int")
+                        .HasColumnName("options_id");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int")
+                        .HasColumnName("product_id");
+
+                    b.HasKey("Id")
+                        .HasName("PRIMARY");
+
+                    b.HasIndex(new[] { "OptionsId" }, "option_fk_idx");
+
+                    b.HasIndex(new[] { "ProductId" }, "product_fk_idx")
+                        .HasDatabaseName("product_fk_idx2");
+
+                    b.ToTable("product_option", (string)null);
+                });
+
             modelBuilder.Entity("Dominio.Entities.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
@@ -347,6 +372,25 @@ namespace Persistencia.Data.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Dominio.Entities.ProductOption", b =>
+                {
+                    b.HasOne("Dominio.Entities.Option", "Options")
+                        .WithMany("ProductOptions")
+                        .HasForeignKey("OptionsId")
+                        .IsRequired()
+                        .HasConstraintName("fk_option_product");
+
+                    b.HasOne("Dominio.Entities.Product", "Product")
+                        .WithMany("ProductOptions")
+                        .HasForeignKey("ProductId")
+                        .IsRequired()
+                        .HasConstraintName("fk_product_option");
+
+                    b.Navigation("Options");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Dominio.Entities.RefreshToken", b =>
                 {
                     b.HasOne("Dominio.Entities.User", "User")
@@ -382,6 +426,11 @@ namespace Persistencia.Data.Migrations
                     b.Navigation("ProductCategories");
                 });
 
+            modelBuilder.Entity("Dominio.Entities.Option", b =>
+                {
+                    b.Navigation("ProductOptions");
+                });
+
             modelBuilder.Entity("Dominio.Entities.Order", b =>
                 {
                     b.Navigation("OrderDetails");
@@ -392,6 +441,8 @@ namespace Persistencia.Data.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductOptions");
                 });
 
             modelBuilder.Entity("Dominio.Entities.Rol", b =>

@@ -85,6 +85,15 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             }
     }
 
+    private IProductOption _ProductOption;
+    public IProductOption ProductOptions
+    {
+        get { 
+            _ProductOption ??= new ProductOptionRepository(_context);
+                return _ProductOption;
+            }
+    }
+
     private IProductCategory _ProductCategory;
     public IProductCategory ProductCategories
     {
