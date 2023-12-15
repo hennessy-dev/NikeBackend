@@ -41,7 +41,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 
     private ICategory _Category;
-    public ICategory Categorys
+    public ICategory Categories
     {
         get { 
             _Category ??= new CategoryRepository(_context);
@@ -86,7 +86,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     }
 
     private IProductCategory _ProductCategory;
-    public IProductCategory ProductCategorys
+    public IProductCategory ProductCategories
     {
         get { 
             _ProductCategory ??= new ProductCategoryRepository(_context);

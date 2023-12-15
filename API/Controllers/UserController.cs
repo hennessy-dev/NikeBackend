@@ -55,7 +55,7 @@ public class UserController : BaseApiController
     public async Task<ActionResult<Pager<UserDto>>> GetPagination([FromQuery] Params paisParams)
     {
         var entidad = await unitofwork.Users.GetAllAsync(paisParams.PageIndex, paisParams.PageSize, paisParams.Search);
-        var listEntidad = mapper.Map<List<UserDto>>(entidad.registros);
+        var listEntidad = mapper.Map<IQueryable<UserDto>>(entidad.registros);
         return new Pager<UserDto>(listEntidad, entidad.totalRegistros, paisParams.PageIndex, paisParams.PageSize, paisParams.Search);
     }
     [HttpPost("register")]

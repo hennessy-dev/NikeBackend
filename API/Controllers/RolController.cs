@@ -49,7 +49,7 @@ public class RolController : BaseApiController
     public async Task<ActionResult<Pager<RolDto>>> GetPagination([FromQuery] Params paisParams)
     {
         var entidad = await unitofwork.Rols.GetAllAsync(paisParams.PageIndex, paisParams.PageSize, paisParams.Search);
-        var listEntidad = mapper.Map<List<RolDto>>(entidad.registros);
+        var listEntidad = mapper.Map<IQueryable<RolDto>>(entidad.registros);
         return new Pager<RolDto>(listEntidad, entidad.totalRegistros, paisParams.PageIndex, paisParams.PageSize, paisParams.Search);
     }
 

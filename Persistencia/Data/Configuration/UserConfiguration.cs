@@ -20,5 +20,27 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         entity.Property(e => e.Name)
             .HasMaxLength(60)
             .HasColumnName("user");
+
+        entity.HasMany(p => p.Rols)
+           .WithMany(r => r.Users)
+           .UsingEntity<UserRol>(
+
+               j => j
+               .HasOne(pt => pt.Rol)
+               .WithMany(t => t.UserRols)
+               .HasForeignKey(ut => ut.IdRolFk),
+
+
+               j => j
+               .HasOne(et => et.User)
+               .WithMany(et => et.UserRols)
+               .HasForeignKey(el => el.IdUsuarioFk),
+
+               j =>
+               {
+                   j.ToTable("RolUsuario");
+                   j.HasKey(t => new { t.IdUsuarioFk, t.IdRolFk });
+
+               });
     }
 }

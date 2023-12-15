@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
+using Dominio.Entities;
 
 namespace API.Dtos;
-public class DataUserDto
+public class DataUserDto : BaseEntity
 {
-     
 
     public string Message { get; set; }
     public bool IsAuthenticated { get; set; }

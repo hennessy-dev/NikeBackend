@@ -6,10 +6,9 @@ namespace Dominio.Entities;
 
 public partial class RefreshToken : BaseEntity
 {
-     
-
 
     public int UserId { get; set; }
+    public virtual User User { get; set; } = null!;
 
     public string Token { get; set; } = null!;
 
@@ -21,5 +20,4 @@ public partial class RefreshToken : BaseEntity
 
     public string Revoked { get; set; } = null!;
 
-    public virtual User User { get; set; } = null!;
 }
